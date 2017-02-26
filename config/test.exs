@@ -15,5 +15,5 @@ config :state_saver, StateSaver.Repo,
   username: "postgres",
   password: "testpwd",
   database: "state_saver_test",
-  hostname: "192.168.1.22",
+  hostname: "127.0.0.1",
   pool: Ecto.Adapters.SQL.Sandbox
