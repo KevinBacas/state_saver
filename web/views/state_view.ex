@@ -13,6 +13,18 @@ defmodule StateSaver.StateView do
     }
   end
 
+  def render("error.json", %{changeset: changeset}) do
+    errors = Enum.map(changeset.errors, fn {field, detail} ->
+      %{
+        source: %{ pointer: "/data/attributes/#{field}" },
+        title: "Invalid Attribute",
+        detail: render_detail(detail)
+      }
+    end)
+
+    %{errors: errors}
+  end
+
   def state_json(state) do
     %{
       id: state.id,
@@ -21,5 +33,15 @@ defmodule StateSaver.StateView do
       inserted_at: state.inserted_at,
       updated_at: state.updated_at
     }
+  end
+
+  def render_detail({message, values}) do
+    Enum.reduce values, message, fn {k, v}, acc ->
+      String.replace(acc, "%{#{k}}", to_string(v))
+    end
+  end
+
+  def render_detail(message) do
+    message
   end
 end

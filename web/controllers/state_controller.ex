@@ -15,7 +15,9 @@ defmodule StateSaver.StateController do
       {:ok, state} ->
         render(conn, "show.json", state: state)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_status(400)
+        |> render("error.json", changeset: changeset)
     end
   end
 
