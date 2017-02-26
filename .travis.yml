@@ -3,6 +3,8 @@ elixir:
   - 1.4.2
 services:
   - postgresql
+env:
+- MIX_ENV=test
 before_script:
   - psql -c 'create database state_saver_test;' -U postgres
   - mix ecto.migrate
