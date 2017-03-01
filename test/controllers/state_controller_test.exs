@@ -16,8 +16,8 @@ defmodule StateSaver.StateControllerTest do
       "states" => [%{
         "state" => state.state,
         "hash" => state.hash,
-        "inserted_at" => DateTime.from_naive!(state.inserted_at, "Europe/Paris") |> DateTime.to_iso8601,
-        "updated_at" => DateTime.from_naive!(state.updated_at, "Europe/Paris") |> DateTime.to_iso8601
+        "inserted_at" => DateTime.from_naive!(state.inserted_at, "Etc/UTC") |> DateTime.to_iso8601 |> String.slice(0..-2),
+        "updated_at" => DateTime.from_naive!(state.updated_at, "Etc/UTC") |> DateTime.to_iso8601 |> String.slice(0..-2)
       }]
     }
   end
