@@ -14,6 +14,7 @@ defmodule StateSaver.StateControllerTest do
 
     assert json_response(conn, 200) == %{
       "states" => [%{
+        "id" => state.id,
         "state" => state.state,
         "hash" => state.hash,
         "inserted_at" => DateTime.from_naive!(state.inserted_at, "Etc/UTC") |> DateTime.to_iso8601 |> String.slice(0..-2),
