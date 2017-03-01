@@ -1,15 +1,27 @@
 defmodule StateSaver.StateControllerTest do
   use StateSaver.ConnCase
+  import StateSaver.Factory
 
-  alias StateSaver.State
-  @valid_attrs %{hash: "some content", state: "some content"}
-  @invalid_attrs %{}
+  # alias StateSaver.State
+  # @valid_attrs %{hash: "some content", state: "some content"}
+  # @invalid_attrs %{}
 
-  # test "lists all entries on index", %{conn: conn} do
-  #   conn = get conn, state_path(conn, :index)
-  #   assert html_response(conn, 200) =~ "Listing states"
-  # end
-  #
+  test "#index renders a list of states" do
+    conn = build_conn()
+    state = insert(:state)
+
+    conn = get conn, state_path(conn, :index)
+
+    assert json_response(conn, 200) == %{
+      "states" => [%{
+        "state" => state.state,
+        "hash" => state.hash,
+        "inserted_at" => DateTime.from_naive!(state.inserted_at, "Europe/Paris") |> DateTime.to_iso8601,
+        "updated_at" => DateTime.from_naive!(state.updated_at, "Europe/Paris") |> DateTime.to_iso8601
+      }]
+    }
+  end
+
   # test "renders form for new resources", %{conn: conn} do
   #   conn = get conn, state_path(conn, :new)
   #   assert html_response(conn, 200) =~ "New state"

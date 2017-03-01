@@ -39,5 +39,5 @@ config :state_saver, StateSaver.Repo,
   username: "postgres",
   password: "devpwd",
   database: "state_saver_dev",
-  hostname: "192.168.1.14",
+  hostname: "172.20.10.2",
   pool_size: 10
