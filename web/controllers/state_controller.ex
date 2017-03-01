@@ -22,8 +22,15 @@ defmodule StateSaver.StateController do
   end
 
   def show(conn, %{"id" => hash}) do
-    state = Repo.get_by!(State, hash: hash)
-    render(conn, "show.json", state: state)
+    state = Repo.get_by(State, hash: hash)
+    if (state == nil) do
+      conn
+      |> put_status(404)
+      |> render("404.json", message: "No item found with this hash.")
+    else
+      conn
+      |> render("show.json", state: state)
+    end
   end
 
   # def update(conn, %{"id" => id, "state" => state_params}) do

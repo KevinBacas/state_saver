@@ -37,7 +37,7 @@ config :phoenix, :stacktrace_depth, 20
 config :state_saver, StateSaver.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "devpwd",
-  database: "state_saver_dev",
-  hostname: "172.20.10.2",
+  password: "prodpwd",
+  database: "state_saver_prod",
+  hostname: "10.0.75.1",
   pool_size: 10

@@ -16,6 +16,7 @@ defmodule StateSaver.State do
     |> cast(params, [:state, :hash])
     |> validate_required([:state])
     |> generate_hash
+    |> unique_constraint(:hash)
   end
 
   defp generate_hash(changeset) do

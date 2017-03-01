@@ -13,6 +13,13 @@ defmodule StateSaver.StateView do
     }
   end
 
+  def render("404.json", %{message: message}) do
+    %{
+      statusCode: 404,
+      message: message
+    }
+  end
+
   def render("error.json", %{changeset: changeset}) do
     errors = Enum.map(changeset.errors, fn {field, detail} ->
       %{
